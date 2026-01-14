@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+
+/* General styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Alexandria", sans-serif;
+    background: linear-gradient(135deg, #2f2f2f 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    color: #FBEEE2;
+    direction: rtl;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    padding: 20px;
+}
+
+/* Header */
+.header h1 {
+    color: #fed700;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.header .lead {
+    color: #FBEEE2;
+    opacity: 0.9;
+}
+
+/* Quiz container */
+.quiz-container {
+    margin-top: 30px;
+}
+
+.question-card {
+    background: #2f2f2f;
+    border: 2px solid #7b1b38;
+    padding: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px;
+}
+
+.question-card h3 {
+    color: #fed700;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Options */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-label {
+    cursor: pointer;
+    width: 100%;
+}
+
+.option-label input[type="radio"] {
+    display: none;
+}
+
+.option-box {
+    padding: 18px 25px;
+    background: #1a1a1a;
+    border: 2px solid #2f2f2f;
+    font-size: 1.1rem;
+    color: #FBEEE2;
+}
+
+.option-box:hover {
+    background: #2f2f2f;
+    border-color: #7b1b38;
+}
+
+.option-label input[type="radio"]:checked + .option-box {
+    background: #7b1b38;
+    color: #fed700;
+    border-color: #fed700;
+    font-weight: 600;
+}
+
+/* Result page */
+.result-container {
+    margin-top: 30px;
+    display: none;
+}
+
+.result-card {
+    background: #2f2f2f;
+    border: 2px solid #7b1b38;
+    padding: 40px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.result-card h2 {
+    color: #fed700;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.plant-result {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.plant-image {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 25px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    border: 2px solid #7b1b38;
+}
+
+.plant-name {
+    color: #fed700;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.plant-description {
+    font-size: 1.2rem;
+    color: #FBEEE2;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Buttons */
+.btn-success {
+    background-color: #7b1b38;
+    border: 2px solid #fed700;
+    color: #fed700;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: "Alexandria", sans-serif;
+}
+
+.btn-success:hover {
+    background-color: #fed700;
+    border-color: #fed700;
+    color: #2f2f2f;
+}
+
+.btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid #7b1b38;
+    color: #FBEEE2;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: "Alexandria", sans-serif;
+}
+
+.btn-outline-primary:hover {
+    background-color: #7b1b38;
+    border-color: #7b1b38;
+    color: #fed700;
+}
+
+.btn-outline-secondary {
+    display: none;
+}
+
+/* Footer */
+footer {
+    border-top: 2px solid #7b1b38;
+    margin-top: 50px;
+}
+
+footer .text-muted {
+    color: #FBEEE2 !important;
+    opacity: 0.7;
+}
+
+/* Hide quiz when showing results */
+.quiz-container.hidden {
+    display: none;
+}
+
+.result-container.show {
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .question-card {
+        padding: 20px;
+    }
+    
+    .question-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .option-box {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+    
+    .result-card {
+        padding: 25px;
+    }
+    
+    .plant-name {
+        font-size: 1.5rem;
+    }
+    
+    .plant-description {
+        font-size: 1rem;
+    }
+}
