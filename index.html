@@ -8,23 +8,59 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="app-container">
         <!-- Header -->
-        <div class="header text-center py-4">
-            <h1 class="display-4">مُخمَل</h1>
-            <p class="lead">اكتشف العطر المثالي لشخصيتك</p>
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo.svg" alt="مُخمَل" class="brand-logo">
+                <h1 class="brand-name">مُخمَل</h1>
+            </div>
+            <p class="tagline">العطور الفاخرة</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-text" id="progressText">1 / 6</div>
         </div>
 
         <!-- Quiz Form -->
         <div class="quiz-container" id="quizContainer">
             <form id="quizForm">
                 
-                <!-- السؤال 1 -->
-                <div class="question-card mb-4">
-                    <h3>السؤال 1: اختر الفئة</h3>
+                <!-- Step 1: Age -->
+                <div class="step" data-step="1">
+                    <h2 class="step-title">كم عمرك؟</h2>
                     <div class="options">
                         <label class="option-label">
-                            <input type="radio" name="gender" value="male" required>
+                            <input type="radio" name="age" value="under18">
+                            <div class="option-box">أقل من 18</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="20s">
+                            <div class="option-box">العشرينات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="30s">
+                            <div class="option-box">الثلاثينات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="40s">
+                            <div class="option-box">الأربعينات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="50plus">
+                            <div class="option-box">50+</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 2: Gender -->
+                <div class="step" data-step="2" style="display: none;">
+                    <h2 class="step-title">اختر الفئة</h2>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="gender" value="male">
                             <div class="option-box">رجالي</div>
                         </label>
                         <label class="option-label">
@@ -34,12 +70,12 @@
                     </div>
                 </div>
 
-                <!-- السؤال 2 -->
-                <div class="question-card mb-4">
-                    <h3>السؤال 2: متى ستستخدم العطر غالبًا؟</h3>
+                <!-- Step 3: Usage -->
+                <div class="step" data-step="3" style="display: none;">
+                    <h2 class="step-title">متى ستستخدم العطر غالبًا؟</h2>
                     <div class="options">
                         <label class="option-label">
-                            <input type="radio" name="usage" value="daily" required>
+                            <input type="radio" name="usage" value="daily">
                             <div class="option-box">يومي</div>
                         </label>
                         <label class="option-label">
@@ -53,12 +89,12 @@
                     </div>
                 </div>
 
-                <!-- السؤال 3 -->
-                <div class="question-card mb-4">
-                    <h3>السؤال 3: تحب العطر يكون؟</h3>
+                <!-- Step 4: Strength -->
+                <div class="step" data-step="4" style="display: none;">
+                    <h2 class="step-title">تحب العطر يكون؟</h2>
                     <div class="options">
                         <label class="option-label">
-                            <input type="radio" name="strength" value="soft" required>
+                            <input type="radio" name="strength" value="soft">
                             <div class="option-box">ناعم وقريب</div>
                         </label>
                         <label class="option-label">
@@ -72,12 +108,12 @@
                     </div>
                 </div>
 
-                <!-- السؤال 4 -->
-                <div class="question-card mb-4">
-                    <h3>السؤال 4: أي طابع يلفت انتباهك أكثر؟</h3>
+                <!-- Step 5: Style -->
+                <div class="step" data-step="5" style="display: none;">
+                    <h2 class="step-title">أي طابع يلفت انتباهك أكثر؟</h2>
                     <div class="options">
                         <label class="option-label">
-                            <input type="radio" name="style" value="classic" required>
+                            <input type="radio" name="style" value="classic">
                             <div class="option-box">كلاسيكي وأنيق</div>
                         </label>
                         <label class="option-label">
@@ -91,12 +127,12 @@
                     </div>
                 </div>
 
-                <!-- السؤال 5 -->
-                <div class="question-card mb-4">
-                    <h3>السؤال 5: اختر النوتة الأقرب لقلبك</h3>
+                <!-- Step 6: Note -->
+                <div class="step" data-step="6" style="display: none;">
+                    <h2 class="step-title">اختر النوتة الأقرب لقلبك</h2>
                     <div class="options">
                         <label class="option-label">
-                            <input type="radio" name="note" value="oud" required>
+                            <input type="radio" name="note" value="oud">
                             <div class="option-box">عود وخشب</div>
                         </label>
                         <label class="option-label">
@@ -118,33 +154,36 @@
                     </div>
                 </div>
 
-                <!-- Submit Button -->
-                <div class="text-center mt-5">
-                    <button type="submit" class="btn btn-success btn-lg">
-                        اكتشف عطرك المثالي
-                    </button>
+                <!-- Navigation -->
+                <div class="navigation">
+                    <button type="button" class="btn-prev" id="prevBtn" style="display: none;">← السابق</button>
                 </div>
 
             </form>
         </div>
 
         <!-- Result Container -->
-        <div class="result-container" id="resultContainer">
+        <div class="result-container" id="resultContainer" style="display: none;">
             <div class="result-card">
-                <h2 class="text-center mb-4">عطرك المثالي هو...</h2>
+                <div class="result-header">
+                    <img src="logo.svg" alt="مُخمَل" class="result-logo">
+                    <h2 class="result-title">عطرك المثالي</h2>
+                </div>
                 
-                <div class="plant-result">
-                    <img id="plantImage" src="" alt="" class="plant-image">
+                <div class="perfume-result">
+                    <div class="perfume-image-container">
+                        <img id="plantImage" src="" alt="" class="perfume-image">
+                    </div>
                     
-                    <h3 id="plantName" class="plant-name"></h3>
+                    <h3 id="plantName" class="perfume-name"></h3>
                     
-                    <p id="plantDescription" class="plant-description"></p>
+                    <div id="plantDescription" class="perfume-description"></div>
                     
-                    <div class="button-group">
-                        <a id="shopLink" href="#" target="_blank" class="btn btn-success btn-lg mb-2">
+                    <div class="result-actions">
+                        <a id="shopLink" href="#" target="_blank" class="btn-primary">
                             اطلب الآن
                         </a>
-                        <button id="resetButton" class="btn btn-outline-primary btn-lg">
+                        <button id="resetButton" class="btn-secondary">
                             إعادة الاختبار
                         </button>
                     </div>
@@ -153,8 +192,8 @@
         </div>
 
         <!-- Footer -->
-        <footer class="text-center py-4 mt-5">
-            <p class="text-muted">© 2025 مُخمَل - عطور فاخرة</p>
+        <footer class="footer">
+            <p>© 2025 مُخمَل</p>
         </footer>
     </div>
 
@@ -348,11 +387,60 @@
             return score;
         }
 
-        // Form submission (scoring based => always returns the closest match)
-        document.getElementById('quizForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Step navigation
+        let currentStep = 1;
+        const totalSteps = 6;
 
-            const formData = new FormData(this);
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${currentStep} / ${totalSteps}`;
+        }
+
+        function showStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(step => {
+                step.style.display = 'none';
+            });
+            
+            const targetStep = document.querySelector(`[data-step="${stepNumber}"]`);
+            if (targetStep) {
+                targetStep.style.display = 'block';
+            }
+
+            const prevBtn = document.getElementById('prevBtn');
+            if (stepNumber > 1) {
+                prevBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            currentStep = stepNumber;
+            updateProgress();
+        }
+
+        // Auto-advance on selection
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                setTimeout(() => {
+                    if (currentStep < totalSteps) {
+                        showStep(currentStep + 1);
+                    } else {
+                        // Last step - show results
+                        calculateAndShowResult();
+                    }
+                }, 300);
+            });
+        });
+
+        // Previous button
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        });
+
+        function calculateAndShowResult() {
+            const formData = new FormData(document.getElementById('quizForm'));
             const gender = formData.get('gender');
             const usage = formData.get('usage');
             const strength = formData.get('strength');
@@ -361,7 +449,6 @@
 
             const desiredTags = [];
 
-            // Note preference
             if (note === 'oud') {
                 desiredTags.push({ kind: 'note', tag: 'oud' });
                 desiredTags.push({ kind: 'note', tag: 'woody' });
@@ -371,7 +458,6 @@
             if (note === 'fresh') desiredTags.push({ kind: 'note', tag: 'fresh' });
             if (note === 'spicy') desiredTags.push({ kind: 'note', tag: 'spicy' });
 
-            // Usage
             if (usage === 'daily') desiredTags.push({ kind: 'occasion', tag: 'fresh' });
             if (usage === 'formal') desiredTags.push({ kind: 'occasion', tag: 'formal' });
             if (usage === 'night') {
@@ -379,12 +465,10 @@
                 desiredTags.push({ kind: 'occasion', tag: 'romantic' });
             }
 
-            // Strength
             if (strength === 'soft') desiredTags.push({ kind: 'strength', tag: 'soft' });
             if (strength === 'balanced') desiredTags.push({ kind: 'strength', tag: 'balanced' });
             if (strength === 'strong') desiredTags.push({ kind: 'strength', tag: 'strong' });
 
-            // Style
             if (style === 'classic') desiredTags.push({ kind: 'style', tag: 'classic' });
             if (style === 'modern') desiredTags.push({ kind: 'style', tag: 'modern' });
             if (style === 'mysterious') desiredTags.push({ kind: 'style', tag: 'mysterious' });
@@ -413,18 +497,23 @@
             document.getElementById('plantDescription').innerHTML = `<strong>النوتات:</strong> ${perfume.notes}<br><br>${perfume.description}`;
             document.getElementById('shopLink').href = '#';
 
-            document.getElementById('quizContainer').classList.add('hidden');
-            document.getElementById('resultContainer').classList.add('show');
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'block';
 
             window.scrollTo({ top: 0 });
-        });
+        }
 
         document.getElementById('resetButton').addEventListener('click', function() {
             document.getElementById('quizForm').reset();
-            document.getElementById('quizContainer').classList.remove('hidden');
-            document.getElementById('resultContainer').classList.remove('show');
+            currentStep = 1;
+            showStep(1);
+            document.getElementById('quizContainer').style.display = 'block';
+            document.getElementById('resultContainer').style.display = 'none';
             window.scrollTo({ top: 0 });
         });
+
+        // Initialize
+        showStep(1);
     </script>
 </body>
 </html>
