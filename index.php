@@ -257,51 +257,180 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
         </footer>
     </div>
 
+    <!-- Easter Egg Modal -->
+    <div id="easterEggModal" class="easter-modal" style="display: none;">
+        <div class="easter-modal-content">
+            <h3 class="easter-modal-title">متأكد؟</h3>
+            <div class="easter-modal-buttons">
+                <button id="easterYes" class="easter-btn easter-btn-yes">نعم</button>
+                <button id="easterNo" class="easter-btn easter-btn-no">لا</button>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Perfume database
         const perfumes = {
+            shakhah: {
+                image: 'https://via.placeholder.com/400x300/0a0a0a/7b1b38?text=💩',
+                name: 'عطر شخة',
+                latinName: 'shakhah',
+                gender: 'none',
+                notes: 'بول، قمامة، جوارب قديمة',
+                description: 'تحفة فنية من روائح الشوارع الخلفية، يجمع بين نفاذة البول المتعفن ورائحة القمامة في يوم صيفي حار. مع لمسات من الجوارب التي لم تُغسل منذ شهور. مثالي لمن يريد إفراغ المكان من حوله. ثباته يدوم لأسابيع ولا يمكن إزالته حتى بالصابون المعقم. تحذير: قد يسبب الإغماء للآخرين.'
+            },
             ouwar: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=أُوار',
+                image: 'imgs/ouwar.jpg',
                 name: 'أُوار',
+                latinName: 'ouwar',
                 gender: 'male',
-                notes: 'عود، عنبر، مسك',
-                description: 'عطر شرقي فخم يجمع بين دفء العود وعمق العنبر، مثالي للمناسبات الرسمية والأمسيات الخاصة.'
+                notes: 'برغموت – فلفل وردي – عود – عنبر أبيض – جلد – مسك',
+                description: 'عطر قوي وحاد، راقٍ وجذاب، يعكس فخامة عميقة وحضورًا واثقًا، بطابع جلدي–عودي أنيق.'
             },
-            lail: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=ليل',
-                name: 'ليل',
+            alez: {
+                image: 'imgs/alez.jpg',
+                name: 'العِز',
+                latinName: 'alez',
                 gender: 'male',
-                notes: 'عود، فانيليا، تبغ',
-                description: 'عطر غامض وجذاب يمزج بين قوة العود وحلاوة الفانيليا مع لمسة من التبغ الفاخر.'
+                notes: 'برغموت – لافندر – زعفران – عود خشبي – جلد – مسك – عود',
+                description: 'شرقي خشبي أروماتيك، مهيب ومتزن، يجمع بين الرجولة الكلاسيكية والقوة الشرقية.'
             },
-            ward: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=ورد',
-                name: 'ورد',
-                gender: 'female',
-                notes: 'ورد، ياسمين، مسك',
-                description: 'عطر زهري أنثوي راقي يجسد الأنوثة الناعمة مع لمسة من المسك الدافئ.'
-            },
-            noor: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=نور',
-                name: 'نور',
-                gender: 'female',
-                notes: 'حمضيات، زهور، فانيليا',
-                description: 'عطر منعش ومشرق يبدأ بحمضيات حيوية وينتهي بدفء الفانيليا الحلوة.'
-            },
-            samt: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=صمت',
-                name: 'صمت',
+            gentle: {
+                image: 'imgs/gentle.jpg',
+                name: 'جِنتل',
+                latinName: 'gentle',
                 gender: 'male',
-                notes: 'خشب الصندل، عود، مسك',
-                description: 'عطر هادئ وعميق يعكس الوقار والأناقة الكلاسيكية.'
+                notes: 'توت العرعر – جوزة الطيب – كزبرة – فانيليا – مسك – كراميل – خشب العنبر',
+                description: 'دافئ وحلو، ناعم وفاخر، بفانيليا غنية ولمسة مخملية أنيقة.'
             },
-            farah: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=فرح',
-                name: 'فرح',
+            arabi: {
+                image: 'imgs/arabi.jpg',
+                name: 'عَرَبي',
+                latinName: 'arabi',
+                gender: 'male',
+                notes: 'زعفران – ورد أسود – فانيليا – باتشولي – عود',
+                description: 'فخم، دافئ وغامض، بروح شرقية أصيلة ولمسة عود عميقة.'
+            },
+            rajul: {
+                image: 'imgs/rajul.jpg',
+                name: 'رَجُل',
+                latinName: 'rajul',
+                gender: 'male',
+                notes: 'هيل – جلد – عنبر – طحالب – باتشولي',
+                description: 'جلدي ترابي قوي، رجولي صِرف، يعكس الثبات والهيبة والنضج.'
+            },
+            ghasaq: {
+                image: 'imgs/ghasaq.jpg',
+                name: 'غَسَق',
+                latinName: 'ghasaq',
+                gender: 'male',
+                notes: 'حمضيات – توابل دافئة – أوركيد أسود – بخور – أخشاب – شوكولا',
+                description: 'دافئ، فاخر وغامق، بطابع شرقي زهري مظلم ولمسة شوكولاتة عميقة.'
+            },
+            haybah: {
+                image: 'imgs/haybah.jpg',
+                name: 'هَيْبَة',
+                latinName: 'haybah',
+                gender: 'male',
+                notes: 'أناناس – كريفوف – برغموت – باتشولي – ياسمين – أخشاب – طحالب',
+                description: 'منعش فاخر، قوي الشخصية، يجمع بين الحداثة والهيبة الكلاسيكية.'
+            },
+            jamr: {
+                image: 'imgs/jamr.jpg',
+                name: 'جَمْر',
+                latinName: 'jamr',
+                gender: 'male',
+                notes: 'هيل – قرفة – باتشولي – ورد تركي – جلد – عود عنبري',
+                description: 'حار ودافئ، شرقي جلدي، جريء ومشتعل كالجمر.'
+            },
+            dukhoon: {
+                image: 'imgs/dukhoon.jpg',
+                name: 'دُخُون',
+                latinName: 'dukhoon',
+                gender: 'male',
+                notes: 'توت بري – صبار – نارسيسو – خشب صندل – تبغ – فانيليا – بلسم',
+                description: 'دخاني ناعم، دافئ وغامض، متوازن بين الحلاوة والعمق الخشبي.'
+            },
+            waqar: {
+                image: 'imgs/waqar.jpg',
+                name: 'وَقَار',
+                latinName: 'waqar',
+                gender: 'male',
+                notes: 'هيل – فلفل – خشب صندل – عود – باتشولي – تونكا – عنبر – فانيليا',
+                description: 'فخم وهادئ، عميق ومتزن، يعكس الوقار والرقي العالي.'
+            },
+            ufuq: {
+                image: 'imgs/ufuq.jpg',
+                name: 'أُفُق',
+                latinName: 'ufuq',
+                gender: 'male',
+                notes: 'مندرين – كراميل – عسل – تونكا',
+                description: 'دافئ حلو، مريح وناعم، بإحساس عصري جذاب.'
+            },
+            duja: {
+                image: 'imgs/duja.jpg',
+                name: 'دُجى',
+                latinName: 'duja',
+                gender: 'male',
+                notes: 'نبيذ – برغموت – لافندر – فانيليا – كستناء – باتشولي',
+                description: 'ليلي غامق، دافئ وحسي، بطابع فاخر ومخملي.'
+            },
+            wahj: {
+                image: 'imgs/wahj.jpg',
+                name: 'وَهْج',
+                latinName: 'wahj',
+                gender: 'male',
+                notes: 'تفاح – لافندر – غاردينيا – ياسمين – فانيليا – هيل – خشب صندل – باتشولي',
+                description: 'مضيء ودافئ، أنيق ومتوازن، يجمع بين النعومة والجاذبية.'
+            },
+            ghazal: {
+                image: 'imgs/ghazal.jpg',
+                name: 'غَزَل',
+                latinName: 'ghazal',
                 gender: 'female',
-                notes: 'فواكه، زهور، كراميل',
-                description: 'عطر مبهج وحلو يجمع بين نضارة الفواكه وحلاوة الكراميل الدافئة.'
+                notes: 'خوخ – مندَرين – زهور بيضاء – أوركيد زهري – توت – مسك',
+                description: 'أنثوي ناعم، حلو ومنعش، رومانسي وجذاب.'
+            },
+            ghuroor: {
+                image: 'imgs/ghuroor.jpg',
+                name: 'غُرور',
+                latinName: 'ghuroor',
+                gender: 'female',
+                notes: 'زهر البرتقال – برغموت – ياسمين – فانيليا – مسك',
+                description: 'فاخر وأنيق، ناعم وحسي، يعكس الثقة والتميّز.'
+            },
+            hayam: {
+                image: 'imgs/hayam.jpg',
+                name: 'هَيَام',
+                latinName: 'hayam',
+                gender: 'female',
+                notes: 'كشمش أسود – كمثرى – زهور بيضاء – سوسن – تونكا – فانيليا',
+                description: 'رومانسي دافئ، ناعم وعميق، أنثوي ومخملي.'
+            },
+            hamsah: {
+                image: 'imgs/hamsah.jpg',
+                name: 'هَمْسَة',
+                latinName: 'hamsah',
+                gender: 'female',
+                notes: 'زهور النارنج – لافندر – زهور بيضاء – عنبر أبيض – مسك',
+                description: 'هادئ ونقي، أنثوي راقٍ، ناعم كهمسة دافئة.'
+            },
+            waad: {
+                image: 'imgs/waad.jpg',
+                name: 'وَعْد',
+                latinName: 'waad',
+                gender: 'female',
+                notes: 'خوخ – توت – زنبق – خشب صندل – مسك',
+                description: 'ناعم ومشرق، رومانسي وأنيق، إحساس بالدفء والوفاء.'
+            },
+            suha: {
+                image: 'imgs/suha.jpg',
+                name: 'سُهى',
+                latinName: 'suha',
+                gender: 'female',
+                notes: 'فريز – توت أحمر – توت أسود – كرز – عنب أسود – ليمون',
+                description: 'فروتي مشرق، حيوي وجذاب، مرح وأنثوي بلمسة ليلية.'
             }
         };
 
@@ -507,6 +636,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
 
         // Initialize
         showStep(1);
+
+        // Easter Egg: 7 clicks on empty space
+        let clickCount = 0;
+        let clickTimer = null;
+
+        document.addEventListener('click', function(e) {
+            // Only count clicks on body/container, not on interactive elements
+            if (e.target === document.body || 
+                e.target.classList.contains('app-container') || 
+                e.target.classList.contains('header') ||
+                e.target.classList.contains('quiz-container') ||
+                e.target.classList.contains('step')) {
+                
+                clickCount++;
+                
+                // Reset counter after 2 seconds of no clicks
+                clearTimeout(clickTimer);
+                clickTimer = setTimeout(() => {
+                    clickCount = 0;
+                }, 2000);
+
+                // Show modal on 7th click
+                console.log(clickCount)
+                if (clickCount === 7) {
+                    document.getElementById('easterEggModal').style.display = 'flex';
+                    clickCount = 0;
+                }
+            }
+        });
+
+        // Easter egg modal buttons
+        document.getElementById('easterYes').addEventListener('click', function() {
+            document.getElementById('easterEggModal').style.display = 'none';
+            
+            // Show the joke perfume
+            const perfume = perfumes.shakhah;
+            
+            document.getElementById('plantImage').src = perfume.image;
+            document.getElementById('plantImage').alt = perfume.name;
+            document.getElementById('plantName').textContent = perfume.name;
+            document.getElementById('plantDescription').innerHTML = `<strong>النوتات:</strong> ${perfume.notes}<br><br>${perfume.description}`;
+            
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'block';
+            
+            window.scrollTo({ top: 0 });
+        });
+
+        document.getElementById('easterNo').addEventListener('click', function() {
+            document.getElementById('easterEggModal').style.display = 'none';
+            clickCount = 0;
+        });
+
+        // Close modal on background click
+        document.getElementById('easterEggModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                clickCount = 0;
+            }
+        });
     </script>
 </body>
 </html>
