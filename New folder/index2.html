@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مُخمَل - اكتشف عطرك المثالي</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo.svg" alt="مُخمَل" class="brand-logo">
+            </div>
+            <h1 class="brand-name">مُخمَل</h1>
+            <p class="tagline">حضور لا ينسى</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-text" id="progressText">1 / 6</div>
+        </div>
+
+        <!-- Quiz Form -->
+        <div class="quiz-container" id="quizContainer">
+            <form id="quizForm" method="POST">
+                
+                <!-- Step 1: Age -->
+                <div class="step" data-step="1">
+                    <h2 class="step-title">كم عمرك؟</h2>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="age" value="under18">
+                            <div class="option-box">أقل من 18</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="20s">
+                            <div class="option-box">العشرينات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="30s">
+                            <div class="option-box">الثلاثينات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="40s">
+                            <div class="option-box">الأربعينات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="age" value="50plus">
+                            <div class="option-box">50+</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 2: Gender -->
+                <div class="step" data-step="2" style="display: none;">
+                    <h2 class="step-title">اختر الفئة</h2>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="gender" value="male">
+                            <div class="option-box">رجالي</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="gender" value="female">
+                            <div class="option-box">نسائي</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 3: Usage -->
+                <div class="step" data-step="3" style="display: none;">
+                    <h2 class="step-title">متى ستستخدم العطر غالبًا؟</h2>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="usage" value="daily">
+                            <div class="option-box">يومي</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="usage" value="formal">
+                            <div class="option-box">مناسبات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="usage" value="night">
+                            <div class="option-box">مساء</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 4: Strength -->
+                <div class="step" data-step="4" style="display: none;">
+                    <h2 class="step-title">تحب العطر يكون؟</h2>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="strength" value="soft">
+                            <div class="option-box">ناعم وقريب</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="strength" value="balanced">
+                            <div class="option-box">متوازن</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="strength" value="strong">
+                            <div class="option-box">قوي ولافت</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 5: Style -->
+                <div class="step" data-step="5" style="display: none;">
+                    <h2 class="step-title">أي طابع يلفت انتباهك أكثر؟</h2>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="style" value="classic">
+                            <div class="option-box">كلاسيكي وأنيق</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="style" value="modern">
+                            <div class="option-box">عصري ومضيء</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="style" value="mysterious">
+                            <div class="option-box">غامض وعميق</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Step 6: Note -->
+                <div class="step" data-step="6" style="display: none;">
+                    <h2 class="step-title">اختر النوتة الأقرب لقلبك</h2>
+                    <div class="options">
+                        <label class="option-label">
+                            <input type="radio" name="note" value="oud">
+                            <div class="option-box">عود وخشب</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="note" value="floral">
+                            <div class="option-box">زهور ناعمة</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="note" value="sweet">
+                            <div class="option-box">حلاوة دافئة</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="note" value="fresh">
+                            <div class="option-box">انتعاش وحمضيات</div>
+                        </label>
+                        <label class="option-label">
+                            <input type="radio" name="note" value="spicy">
+                            <div class="option-box">توابل وحِدّة</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation">
+                    <button type="button" class="btn-prev" id="prevBtn" style="display: none;">← السابق</button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Result Container -->
+        <div class="result-container" id="resultContainer" style="display: none;">
+            <div class="result-card">
+                <div class="perfume-result">
+                    <div class="perfume-image-container">
+                        <img id="plantImage" src="" alt="" class="perfume-image">
+                    </div>
+                    
+                    <h3 id="plantName" class="perfume-name"></h3>
+                    
+                    <div id="plantDescription" class="perfume-description"></div>
+                    
+                    <div class="result-actions">
+                        <button id="resetButton" class="btn-secondary">
+                            إعادة الاختبار
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2025 مُخمَل</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+        // Perfume database
+        const perfumes = {
+            shakhah: {
+                image: 'https://via.placeholder.com/400x300/0a0a0a/7b1b38?text=💩',
+                name: '',
+                latinName: '',
+                gender: 'none',
+                notes: '',
+                description: ''
+            },
+            ouwar: {
+                image: 'imgs/awar.jpg',
+                name: 'أُوار',
+                latinName: 'ouwar',
+                gender: 'male',
+                notes: 'برغموت – فلفل وردي – عود – عنبر أبيض – جلد – مسك',
+                description: 'عطر قوي وحاد، راقٍ وجذاب، يعكس فخامة عميقة وحضورًا واثقًا، بطابع جلدي–عودي أنيق.'
+            },
+            alez: {
+                image: 'imgs/alaz.jpg',
+                name: 'العِز',
+                latinName: 'alez',
+                gender: 'male',
+                notes: 'برغموت – لافندر – زعفران – عود خشبي – جلد – مسك – عود',
+                description: 'شرقي خشبي أروماتيك، مهيب ومتزن، يجمع بين الرجولة الكلاسيكية والقوة الشرقية.'
+            },
+            gentle: {
+                image: 'imgs/gentle.jpg',
+                name: 'جِنتل',
+                latinName: 'gentle',
+                gender: 'male',
+                notes: 'توت العرعر – جوزة الطيب – كزبرة – فانيليا – مسك – كراميل – خشب العنبر',
+                description: 'دافئ وحلو، ناعم وفاخر، بفانيليا غنية ولمسة مخملية أنيقة.'
+            },
+            arabi: {
+                image: 'imgs/azbi.jpg',
+                name: 'عَرَبي',
+                latinName: 'arabi',
+                gender: 'male',
+                notes: 'زعفران – ورد أسود – فانيليا – باتشولي – عود',
+                description: 'فخم، دافئ وغامض، بروح شرقية أصيلة ولمسة عود عميقة.'
+            },
+            rajul: {
+                image: 'imgs/rajul.jpg',
+                name: 'رَجُل',
+                latinName: 'rajul',
+                gender: 'male',
+                notes: 'هيل – جلد – عنبر – طحالب – باتشولي',
+                description: 'جلدي ترابي قوي، رجولي صِرف، يعكس الثبات والهيبة والنضج.'
+            },
+            ghasaq: {
+                image: 'imgs/ghasaq.jpg', //!
+                name: 'غَسَق',
+                latinName: 'ghasaq',
+                gender: 'male',
+                notes: 'حمضيات – توابل دافئة – أوركيد أسود – بخور – أخشاب – شوكولا',
+                description: 'دافئ، فاخر وغامق، بطابع شرقي زهري مظلم ولمسة شوكولاتة عميقة.'
+            },
+            haybah: {
+                image: 'imgs/heyba.jpg',
+                name: 'هَيْبَة',
+                latinName: 'haybah',
+                gender: 'male',
+                notes: 'أناناس – كريفوف – برغموت – باتشولي – ياسمين – أخشاب – طحالب',
+                description: 'منعش فاخر، قوي الشخصية، يجمع بين الحداثة والهيبة الكلاسيكية.'
+            },
+            jamr: {
+                image: 'imgs/jamr.jpg',
+                name: 'جَمْر',
+                latinName: 'jamr',
+                gender: 'male',
+                notes: 'هيل – قرفة – باتشولي – ورد تركي – جلد – عود عنبري',
+                description: 'حار ودافئ، شرقي جلدي، جريء ومشتعل كالجمر.'
+            },
+            // dukhoon: {
+            //     image: 'imgs/dukhoon.jpg', //!
+            //     name: 'دُخُون',
+            //     latinName: 'dukhoon',
+            //     gender: 'male',
+            //     notes: 'توت بري – صبار – نارسيسو – خشب صندل – تبغ – فانيليا – بلسم',
+            //     description: 'دخاني ناعم، دافئ وغامض، متوازن بين الحلاوة والعمق الخشبي.'
+            // },
+            waqar: {
+                image: 'imgs/waqar.jpg',
+                name: 'وَقَار',
+                latinName: 'waqar',
+                gender: 'male',
+                notes: 'هيل – فلفل – خشب صندل – عود – باتشولي – تونكا – عنبر – فانيليا',
+                description: 'فخم وهادئ، عميق ومتزن، يعكس الوقار والرقي العالي.'
+            },
+            ufuq: {
+                image: 'imgs/ufuq.jpg',
+                name: 'أُفُق',
+                latinName: 'ufuq',
+                gender: 'male',
+                notes: 'مندرين – كراميل – عسل – تونكا',
+                description: 'دافئ حلو، مريح وناعم، بإحساس عصري جذاب.'
+            },
+            duja: {
+                image: 'imgs/duja.jpg',
+                name: 'دُجى',
+                latinName: 'duja',
+                gender: 'male',
+                notes: 'نبيذ – برغموت – لافندر – فانيليا – كستناء – باتشولي',
+                description: 'ليلي غامق، دافئ وحسي، بطابع فاخر ومخملي.'
+            },
+            wahj: {
+                image: 'imgs/wahj.jpg',
+                name: 'وَهْج',
+                latinName: 'wahj',
+                gender: 'male',
+                notes: 'تفاح – لافندر – غاردينيا – ياسمين – فانيليا – هيل – خشب صندل – باتشولي',
+                description: 'مضيء ودافئ، أنيق ومتوازن، يجمع بين النعومة والجاذبية.'
+            },
+            ghazal: {
+                image: 'imgs/gazal.jpg',
+                name: 'غَزَل',
+                latinName: 'ghazal',
+                gender: 'female',
+                notes: 'خوخ – مندَرين – زهور بيضاء – أوركيد زهري – توت – مسك',
+                description: 'أنثوي ناعم، حلو ومنعش، رومانسي وجذاب.'
+            },
+            ghuroor: {
+                image: 'imgs/ghurur.jpg',
+                name: 'غُرور',
+                latinName: 'ghuroor',
+                gender: 'female',
+                notes: 'زهر البرتقال – برغموت – ياسمين – فانيليا – مسك',
+                description: 'فاخر وأنيق، ناعم وحسي، يعكس الثقة والتميّز.'
+            },
+            hayam: {
+                image: 'imgs/heyam.jpg',
+                name: 'هَيَام',
+                latinName: 'hayam',
+                gender: 'female',
+                notes: 'كشمش أسود – كمثرى – زهور بيضاء – سوسن – تونكا – فانيليا',
+                description: 'رومانسي دافئ، ناعم وعميق، أنثوي ومخملي.'
+            },
+            hamsah: {
+                image: 'imgs/hamsah.jpg', //!
+                name: 'هَمْسَة',
+                latinName: 'hamsah',
+                gender: 'female',
+                notes: 'زهور النارنج – لافندر – زهور بيضاء – عنبر أبيض – مسك',
+                description: 'هادئ ونقي، أنثوي راقٍ، ناعم كهمسة دافئة.'
+            },
+            waad: {
+                image: 'imgs/waad.jpg',
+                name: 'وَعْد',
+                latinName: 'waad',
+                gender: 'female',
+                notes: 'خوخ – توت – زنبق – خشب صندل – مسك',
+                description: 'ناعم ومشرق، رومانسي وأنيق، إحساس بالدفء والوفاء.'
+            },
+            suha: {
+                image: 'imgs/suha.jpg',
+                name: 'سُهى',
+                latinName: 'suha',
+                gender: 'female',
+                notes: 'فريز – توت أحمر – توت أسود – كرز – عنب أسود – ليمون',
+                description: 'فروتي مشرق، حيوي وجذاب، مرح وأنثوي بلمسة ليلية.'
+            }
+        };
+
+        function includesAny(text, keywords) {
+            return keywords.some(kw => text.includes(kw));
+        }
+
+        function extractTags(perfume) {
+            const text = `${perfume.notes} ${perfume.description}`.toLowerCase();
+            const tags = new Set();
+
+            if (includesAny(text, ['عود', 'خشب'])) tags.add('oud');
+            if (includesAny(text, ['خشب', 'صندل'])) tags.add('woody');
+            if (includesAny(text, ['عنبر'])) tags.add('amber');
+            if (includesAny(text, ['مسك'])) tags.add('musk');
+            if (includesAny(text, ['فانيليا', 'كراميل', 'عسل', 'تونكا', 'حلو'])) tags.add('sweet');
+            if (includesAny(text, ['حمضيات', 'ليمون', 'مندرين', 'برغموت', 'تفاح', 'أناناس', 'منعش'])) tags.add('fresh');
+            if (includesAny(text, ['ورد', 'زهور', 'ياسمين', 'غاردينيا', 'أوركيد', 'زهر'])) tags.add('floral');
+            if (includesAny(text, ['فلفل', 'قرفة', 'هيل', 'زعفران', 'توابل', 'حار'])) tags.add('spicy');
+            if (includesAny(text, ['بخور', 'دخاني', 'تبغ'])) tags.add('smoky');
+            if (includesAny(text, ['خوخ', 'توت', 'فريز', 'كمثرى', 'كرز', 'عنب', 'فروتي', 'فواكه'])) tags.add('fruity');
+
+            if (includesAny(text, ['قوي', 'حاد', 'جريء', 'مشتعل'])) tags.add('strong');
+            if (includesAny(text, ['ناعم', 'مريح', 'هادئ'])) tags.add('soft');
+            if (includesAny(text, ['متوازن', 'متزن'])) tags.add('balanced');
+
+            if (includesAny(text, ['فخم', 'مهيب', 'وقار', 'هيبة', 'راقي', 'أنيق', 'تميّز', 'رسمي'])) tags.add('formal');
+            if (includesAny(text, ['عصري', 'حديث', 'مشرق'])) tags.add('modern');
+            if (includesAny(text, ['كلاسيكي', 'أناقة'])) tags.add('classic');
+            if (includesAny(text, ['غامض', 'مظلم', 'ليلي', 'جذاب'])) tags.add('mysterious');
+            if (includesAny(text, ['رومانسي'])) tags.add('romantic');
+
+            return tags;
+        }
+
+        function scorePerfume(perfumeTags, desiredTags) {
+            const weights = {
+                note: 4,
+                occasion: 2,
+                strength: 2,
+                style: 2
+            };
+
+            let score = 0;
+
+            desiredTags.forEach(item => {
+                if (perfumeTags.has(item.tag)) {
+                    score += weights[item.kind] ?? 1;
+                }
+            });
+
+            return score;
+        }
+
+        // Step navigation
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${currentStep} / ${totalSteps}`;
+        }
+
+        function showStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(step => {
+                step.style.display = 'none';
+            });
+            
+            const targetStep = document.querySelector(`[data-step="${stepNumber}"]`);
+            if (targetStep) {
+                targetStep.style.display = 'block';
+            }
+
+            const prevBtn = document.getElementById('prevBtn');
+            if (stepNumber > 1) {
+                prevBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            currentStep = stepNumber;
+            updateProgress();
+        }
+
+        // Auto-advance on selection
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                setTimeout(() => {
+                    if (currentStep < totalSteps) {
+                        showStep(currentStep + 1);
+                    } else if (currentStep === totalSteps) {
+                        // Last step - show results
+                        calculateAndShowResult();
+                    }
+                }, 300);
+            });
+        });
+
+        // Previous button
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        });
+
+        function calculateAndShowResult() {
+            const formData = new FormData(document.getElementById('quizForm'));
+            const gender = formData.get('gender');
+            const usage = formData.get('usage');
+            const strength = formData.get('strength');
+            const style = formData.get('style');
+            const note = formData.get('note');
+
+            const desiredTags = [];
+
+            if (note === 'oud') {
+                desiredTags.push({ kind: 'note', tag: 'oud' });
+                desiredTags.push({ kind: 'note', tag: 'woody' });
+            }
+            if (note === 'floral') desiredTags.push({ kind: 'note', tag: 'floral' });
+            if (note === 'sweet') desiredTags.push({ kind: 'note', tag: 'sweet' });
+            if (note === 'fresh') desiredTags.push({ kind: 'note', tag: 'fresh' });
+            if (note === 'spicy') desiredTags.push({ kind: 'note', tag: 'spicy' });
+
+            if (usage === 'daily') desiredTags.push({ kind: 'occasion', tag: 'fresh' });
+            if (usage === 'formal') desiredTags.push({ kind: 'occasion', tag: 'formal' });
+            if (usage === 'night') {
+                desiredTags.push({ kind: 'occasion', tag: 'mysterious' });
+                desiredTags.push({ kind: 'occasion', tag: 'romantic' });
+            }
+
+            if (strength === 'soft') desiredTags.push({ kind: 'strength', tag: 'soft' });
+            if (strength === 'balanced') desiredTags.push({ kind: 'strength', tag: 'balanced' });
+            if (strength === 'strong') desiredTags.push({ kind: 'strength', tag: 'strong' });
+
+            if (style === 'classic') desiredTags.push({ kind: 'style', tag: 'classic' });
+            if (style === 'modern') desiredTags.push({ kind: 'style', tag: 'modern' });
+            if (style === 'mysterious') desiredTags.push({ kind: 'style', tag: 'mysterious' });
+
+            const perfumeEntries = Object.entries(perfumes);
+            const candidates = perfumeEntries.filter(([, perfume]) => perfume.gender === gender);
+            const pool = candidates.length > 0 ? candidates : perfumeEntries;
+
+            let bestKey = pool[0][0];
+            let bestScore = -1;
+
+            pool.forEach(([key, perfume]) => {
+                const tags = extractTags(perfume);
+                const score = scorePerfume(tags, desiredTags);
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestKey = key;
+                }
+            });
+
+            const perfume = perfumes[bestKey];
+
+            // Detect contradictions in user choices
+            const contradictions = [];
+            
+            // Daily usage + Strong/Powerful notes (oud, spicy)
+            if (usage === 'daily' && (note === 'oud' || note === 'spicy')) {
+                contradictions.push('الاستخدام اليومي لا يتناسب عادة مع العود أو التوابل القوية');
+            }
+            
+            // Soft strength + Oud/Spicy notes
+            if (strength === 'soft' && (note === 'oud' || note === 'spicy')) {
+                contradictions.push('العطر الناعم لا يتماشى مع نوتات العود أو التوابل الحادة');
+            }
+            
+            // Strong strength + Fresh/Floral notes
+            if (strength === 'strong' && (note === 'fresh' || note === 'floral')) {
+                contradictions.push('العطر القوي واللافت لا يتناسب عادة مع الحمضيات المنعشة أو الزهور الناعمة');
+            }
+            
+            // Formal occasions + Fresh notes
+            if (usage === 'formal' && note === 'fresh') {
+                contradictions.push('المناسبات الرسمية تتطلب عادة عطورًا أعمق من الحمضيات المنعشة');
+            }
+            
+            // Night usage + Fresh notes
+            if (usage === 'night' && note === 'fresh') {
+                contradictions.push('الاستخدام المسائي يتطلب عادة عطورًا أكثر دفئًا من الحمضيات');
+            }
+            
+            // Classic style + Fresh notes
+            if (style === 'classic' && note === 'fresh') {
+                contradictions.push('الطابع الكلاسيكي الأنيق لا يتماشى عادة مع النوتات المنعشة الخفيفة');
+            }
+            
+            // Modern style + Oud
+            if (style === 'modern' && note === 'oud') {
+                contradictions.push('الطابع العصري المضيء لا يتناسب عادة مع العود التقليدي');
+            }
+
+            document.getElementById('plantImage').src = perfume.image;
+            document.getElementById('plantImage').alt = perfume.name;
+            document.getElementById('plantName').textContent = perfume.name;
+            
+            // Build description with contradiction notice if needed
+            let descriptionHTML = `<strong>النوتات:</strong> ${perfume.notes}<br><br>${perfume.description}`;
+            
+            if (contradictions.length > 0) {
+                const contradictionText = contradictions.join('، ');
+                descriptionHTML = `<div class="contradiction-notice">
+                    <strong>ملاحظة:</strong> ${contradictionText}، لكن هذا أفضل خيار متاح بناءً على اختياراتك.
+                </div><br>` + descriptionHTML;
+            }
+            
+            document.getElementById('plantDescription').innerHTML = descriptionHTML;
+
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'block';
+
+            window.scrollTo({ top: 0 });
+        }
+
+        // Form submission handler
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Calculate result first
+            calculateAndShowResult();
+            
+            // Submit data to PHP backend
+            const formData = new FormData(this);
+            
+            fetch('index.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Quiz data saved successfully');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving quiz data:', error);
+            });
+        });
+
+        document.getElementById('resetButton').addEventListener('click', function() {
+            document.getElementById('quizForm').reset();
+            currentStep = 1;
+            showStep(1);
+            document.getElementById('quizContainer').style.display = 'block';
+            document.getElementById('resultContainer').style.display = 'none';
+            window.scrollTo({ top: 0 });
+        });
+
+        // Initialize
+        showStep(1);
+    </script>
+</body>
+</html>

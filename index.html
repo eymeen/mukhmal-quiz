@@ -26,7 +26,7 @@
 
         <!-- Quiz Form -->
         <div class="quiz-container" id="quizContainer">
-            <form id="quizForm">
+            <form id="quizForm" method="POST">
                 
                 <!-- Step 1: Age -->
                 <div class="step" data-step="1">
@@ -154,23 +154,6 @@
                     </div>
                 </div>
 
-                <!-- Step 7: Contact Info -->
-                <div class="step" data-step="7" style="display: none;">
-                    <h2 class="step-title">معلومات التواصل</h2>
-                    <div class="contact-fields">
-                        <div class="field-group">
-                            <input type="text" name="name" id="name" class="contact-input" placeholder="الاسم" required>
-                        </div>
-                        <div class="field-group">
-                            <input type="tel" name="phone" id="phone" class="contact-input" placeholder="رقم الهاتف" required>
-                        </div>
-                        <div class="field-group">
-                            <input type="email" name="email" id="email" class="contact-input" placeholder="البريد الإلكتروني" required>
-                        </div>
-                        <button type="submit" class="btn-submit">اكتشف عطرك المثالي</button>
-                    </div>
-                </div>
-
                 <!-- Navigation -->
                 <div class="navigation">
                     <button type="button" class="btn-prev" id="prevBtn" style="display: none;">← السابق</button>
@@ -182,11 +165,6 @@
         <!-- Result Container -->
         <div class="result-container" id="resultContainer" style="display: none;">
             <div class="result-card">
-                <div class="result-header">
-                    <img src="logo.svg" alt="مُخمَل" class="result-logo">
-                    <h2 class="result-title">عطرك المثالي</h2>
-                </div>
-                
                 <div class="perfume-result">
                     <div class="perfume-image-container">
                         <img id="plantImage" src="" alt="" class="perfume-image">
@@ -213,170 +191,198 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        
         // Perfume database
         const perfumes = {
-            ouwar: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=أُوار',
-                name: 'أُوار',
-                notes: 'برغموت – فلفل وردي – عود – عنبر أبيض – جلد – مسك',
-                description: 'عطر قوي وحاد، راقٍ وجذاب، يعكس فخامة عميقة وحضورًا واثقًا، بطابع جلدي–عودي أنيق.',
-                gender: 'male'
+            shakhah: {
+                image: 'https://via.placeholder.com/400x300/0a0a0a/7b1b38?text=💩',
+                name: '',
+                latinName: '',
+                gender: 'none',
+                notes: '',
+                description: ''
             },
-            alezz: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=العِز',
+            ouwar: {
+                image: 'imgs/awar.jpg',
+                name: 'أُوار',
+                latinName: 'ouwar',
+                gender: 'male',
+                notes: 'برغموت – فلفل وردي – عود – عنبر أبيض – جلد – مسك',
+                description: 'عطر قوي وحاد، راقٍ وجذاب، يعكس فخامة عميقة وحضورًا واثقًا، بطابع جلدي–عودي أنيق.'
+            },
+            alez: {
+                image: 'imgs/alaz.jpg',
                 name: 'العِز',
+                latinName: 'alez',
+                gender: 'male',
                 notes: 'برغموت – لافندر – زعفران – عود خشبي – جلد – مسك – عود',
-                description: 'شرقي خشبي أروماتيك، مهيب ومتزن، يجمع بين الرجولة الكلاسيكية والقوة الشرقية.',
-                gender: 'male'
+                description: 'شرقي خشبي أروماتيك، مهيب ومتزن، يجمع بين الرجولة الكلاسيكية والقوة الشرقية.'
             },
             gentle: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=جِنتل',
+                image: 'imgs/gentle.jpg',
                 name: 'جِنتل',
+                latinName: 'gentle',
+                gender: 'male',
                 notes: 'توت العرعر – جوزة الطيب – كزبرة – فانيليا – مسك – كراميل – خشب العنبر',
-                description: 'دافئ وحلو، ناعم وفاخر، بفانيليا غنية ولمسة مخملية أنيقة.',
-                gender: 'male'
+                description: 'دافئ وحلو، ناعم وفاخر، بفانيليا غنية ولمسة مخملية أنيقة.'
             },
             arabi: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=عَرَبي',
+                image: 'imgs/azbi.jpg',
                 name: 'عَرَبي',
+                latinName: 'arabi',
+                gender: 'male',
                 notes: 'زعفران – ورد أسود – فانيليا – باتشولي – عود',
-                description: 'فخم، دافئ وغامض، بروح شرقية أصيلة ولمسة عود عميقة.',
-                gender: 'male'
+                description: 'فخم، دافئ وغامض، بروح شرقية أصيلة ولمسة عود عميقة.'
             },
             rajul: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=رَجُل',
+                image: 'imgs/rajul.jpg',
                 name: 'رَجُل',
+                latinName: 'rajul',
+                gender: 'male',
                 notes: 'هيل – جلد – عنبر – طحالب – باتشولي',
-                description: 'جلدي ترابي قوي، رجولي صِرف، يعكس الثبات والهيبة والنضج.',
-                gender: 'male'
+                description: 'جلدي ترابي قوي، رجولي صِرف، يعكس الثبات والهيبة والنضج.'
             },
             ghasaq: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=غَسَق',
+                image: 'imgs/ghasaq.jpg', //!
                 name: 'غَسَق',
+                latinName: 'ghasaq',
+                gender: 'male',
                 notes: 'حمضيات – توابل دافئة – أوركيد أسود – بخور – أخشاب – شوكولا',
-                description: 'دافئ، فاخر وغامق، بطابع شرقي زهري مظلم ولمسة شوكولاتة عميقة.',
-                gender: 'male'
+                description: 'دافئ، فاخر وغامق، بطابع شرقي زهري مظلم ولمسة شوكولاتة عميقة.'
             },
             haybah: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=هَيْبَة',
+                image: 'imgs/heyba.jpg',
                 name: 'هَيْبَة',
+                latinName: 'haybah',
+                gender: 'male',
                 notes: 'أناناس – كريفوف – برغموت – باتشولي – ياسمين – أخشاب – طحالب',
-                description: 'منعش فاخر، قوي الشخصية، يجمع بين الحداثة والهيبة الكلاسيكية.',
-                gender: 'male'
+                description: 'منعش فاخر، قوي الشخصية، يجمع بين الحداثة والهيبة الكلاسيكية.'
             },
             jamr: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=جَمْر',
+                image: 'imgs/jamr.jpg',
                 name: 'جَمْر',
+                latinName: 'jamr',
+                gender: 'male',
                 notes: 'هيل – قرفة – باتشولي – ورد تركي – جلد – عود عنبري',
-                description: 'حار ودافئ، شرقي جلدي، جريء ومشتعل كالجمر.',
-                gender: 'male'
+                description: 'حار ودافئ، شرقي جلدي، جريء ومشتعل كالجمر.'
             },
-            dukhoon: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=دُخُون',
-                name: 'دُخُون',
-                notes: 'توت بري – صبار – نارسيسو – خشب صندل – تبغ – فانيليا – بلسم',
-                description: 'دخاني ناعم، دافئ وغامض، متوازن بين الحلاوة والعمق الخشبي.',
-                gender: 'male'
-            },
+            // dukhoon: {
+            //     image: 'imgs/dukhoon.jpg', //!
+            //     name: 'دُخُون',
+            //     latinName: 'dukhoon',
+            //     gender: 'male',
+            //     notes: 'توت بري – صبار – نارسيسو – خشب صندل – تبغ – فانيليا – بلسم',
+            //     description: 'دخاني ناعم، دافئ وغامض، متوازن بين الحلاوة والعمق الخشبي.'
+            // },
             waqar: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=وَقَار',
+                image: 'imgs/waqar.jpg',
                 name: 'وَقَار',
+                latinName: 'waqar',
+                gender: 'male',
                 notes: 'هيل – فلفل – خشب صندل – عود – باتشولي – تونكا – عنبر – فانيليا',
-                description: 'فخم وهادئ، عميق ومتزن، يعكس الوقار والرقي العالي.',
-                gender: 'male'
+                description: 'فخم وهادئ، عميق ومتزن، يعكس الوقار والرقي العالي.'
             },
             ufuq: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=أُفُق',
+                image: 'imgs/ufuq.jpg',
                 name: 'أُفُق',
+                latinName: 'ufuq',
+                gender: 'male',
                 notes: 'مندرين – كراميل – عسل – تونكا',
-                description: 'دافئ حلو، مريح وناعم، بإحساس عصري جذاب.',
-                gender: 'male'
+                description: 'دافئ حلو، مريح وناعم، بإحساس عصري جذاب.'
             },
             duja: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=دُجى',
+                image: 'imgs/duja.jpg',
                 name: 'دُجى',
+                latinName: 'duja',
+                gender: 'male',
                 notes: 'نبيذ – برغموت – لافندر – فانيليا – كستناء – باتشولي',
-                description: 'ليلي غامق، دافئ وحسي، بطابع فاخر ومخملي.',
-                gender: 'male'
+                description: 'ليلي غامق، دافئ وحسي، بطابع فاخر ومخملي.'
             },
             wahj: {
-                image: 'https://via.placeholder.com/400x300/2f2f2f/fed700?text=وَهْج',
+                image: 'imgs/wahj.jpg',
                 name: 'وَهْج',
+                latinName: 'wahj',
+                gender: 'male',
                 notes: 'تفاح – لافندر – غاردينيا – ياسمين – فانيليا – هيل – خشب صندل – باتشولي',
-                description: 'مضيء ودافئ، أنيق ومتوازن، يجمع بين النعومة والجاذبية.',
-                gender: 'male'
+                description: 'مضيء ودافئ، أنيق ومتوازن، يجمع بين النعومة والجاذبية.'
             },
             ghazal: {
-                image: 'https://via.placeholder.com/400x300/7b1b38/fed700?text=غَزَل',
+                image: 'imgs/gazal.jpg',
                 name: 'غَزَل',
+                latinName: 'ghazal',
+                gender: 'female',
                 notes: 'خوخ – مندَرين – زهور بيضاء – أوركيد زهري – توت – مسك',
-                description: 'أنثوي ناعم، حلو ومنعش، رومانسي وجذاب.',
-                gender: 'female'
+                description: 'أنثوي ناعم، حلو ومنعش، رومانسي وجذاب.'
             },
             ghuroor: {
-                image: 'https://via.placeholder.com/400x300/7b1b38/fed700?text=غُرور',
+                image: 'imgs/ghurur.jpg',
                 name: 'غُرور',
+                latinName: 'ghuroor',
+                gender: 'female',
                 notes: 'زهر البرتقال – برغموت – ياسمين – فانيليا – مسك',
-                description: 'فاخر وأنيق، ناعم وحسي، يعكس الثقة والتميّز.',
-                gender: 'female'
+                description: 'فاخر وأنيق، ناعم وحسي، يعكس الثقة والتميّز.'
             },
             hayam: {
-                image: 'https://via.placeholder.com/400x300/7b1b38/fed700?text=هَيَام',
+                image: 'imgs/heyam.jpg',
                 name: 'هَيَام',
+                latinName: 'hayam',
+                gender: 'female',
                 notes: 'كشمش أسود – كمثرى – زهور بيضاء – سوسن – تونكا – فانيليا',
-                description: 'رومانسي دافئ، ناعم وعميق، أنثوي ومخملي.',
-                gender: 'female'
+                description: 'رومانسي دافئ، ناعم وعميق، أنثوي ومخملي.'
             },
             hamsah: {
-                image: 'https://via.placeholder.com/400x300/7b1b38/fed700?text=هَمْسَة',
+                image: 'imgs/hamsah.jpg', //!
                 name: 'هَمْسَة',
+                latinName: 'hamsah',
+                gender: 'female',
                 notes: 'زهور النارنج – لافندر – زهور بيضاء – عنبر أبيض – مسك',
-                description: 'هادئ ونقي، أنثوي راقٍ، ناعم كهمسة دافئة.',
-                gender: 'female'
+                description: 'هادئ ونقي، أنثوي راقٍ، ناعم كهمسة دافئة.'
             },
             waad: {
-                image: 'https://via.placeholder.com/400x300/7b1b38/fed700?text=وَعْد',
+                image: 'imgs/waad.jpg',
                 name: 'وَعْد',
+                latinName: 'waad',
+                gender: 'female',
                 notes: 'خوخ – توت – زنبق – خشب صندل – مسك',
-                description: 'ناعم ومشرق، رومانسي وأنيق، إحساس بالدفء والوفاء.',
-                gender: 'female'
+                description: 'ناعم ومشرق، رومانسي وأنيق، إحساس بالدفء والوفاء.'
             },
             suha: {
-                image: 'https://via.placeholder.com/400x300/7b1b38/fed700?text=سُهى',
+                image: 'imgs/suha.jpg',
                 name: 'سُهى',
+                latinName: 'suha',
+                gender: 'female',
                 notes: 'فريز – توت أحمر – توت أسود – كرز – عنب أسود – ليمون',
-                description: 'فروتي مشرق، حيوي وجذاب، مرح وأنثوي بلمسة ليلية.',
-                gender: 'female'
+                description: 'فروتي مشرق، حيوي وجذاب، مرح وأنثوي بلمسة ليلية.'
             }
         };
 
-        function includesAny(text, words) {
-            return words.some(word => text.includes(word));
+        function includesAny(text, keywords) {
+            return keywords.some(kw => text.includes(kw));
         }
 
         function extractTags(perfume) {
-            const text = `${perfume.notes} ${perfume.description}`;
+            const text = `${perfume.notes} ${perfume.description}`.toLowerCase();
             const tags = new Set();
 
-            if (includesAny(text, ['عود'])) tags.add('oud');
-            if (includesAny(text, ['خشب', 'أخشاب', 'خشبية', 'صندل', 'خشبي'])) tags.add('woody');
-            if (includesAny(text, ['جلد', 'جلدي'])) tags.add('leather');
+            if (includesAny(text, ['عود', 'خشب'])) tags.add('oud');
+            if (includesAny(text, ['خشب', 'صندل'])) tags.add('woody');
+            if (includesAny(text, ['عنبر'])) tags.add('amber');
             if (includesAny(text, ['مسك'])) tags.add('musk');
             if (includesAny(text, ['فانيليا', 'كراميل', 'عسل', 'تونكا', 'حلو'])) tags.add('sweet');
             if (includesAny(text, ['حمضيات', 'ليمون', 'مندرين', 'برغموت', 'تفاح', 'أناناس', 'منعش'])) tags.add('fresh');
             if (includesAny(text, ['ورد', 'زهور', 'ياسمين', 'غاردينيا', 'أوركيد', 'زهر'])) tags.add('floral');
             if (includesAny(text, ['فلفل', 'قرفة', 'هيل', 'زعفران', 'توابل', 'حار'])) tags.add('spicy');
             if (includesAny(text, ['بخور', 'دخاني', 'تبغ'])) tags.add('smoky');
-            if (includesAny(text, ['خوخ', 'توت', 'فريز', 'كمثرى', 'كرز', 'عنب', 'فروتي'])) tags.add('fruity');
+            if (includesAny(text, ['خوخ', 'توت', 'فريز', 'كمثرى', 'كرز', 'عنب', 'فروتي', 'فواكه'])) tags.add('fruity');
 
             if (includesAny(text, ['قوي', 'حاد', 'جريء', 'مشتعل'])) tags.add('strong');
-            if (includesAny(text, ['ناعم', 'مريح'])) tags.add('soft');
+            if (includesAny(text, ['ناعم', 'مريح', 'هادئ'])) tags.add('soft');
             if (includesAny(text, ['متوازن', 'متزن'])) tags.add('balanced');
 
-            if (includesAny(text, ['فخم', 'مهيب', 'وقار', 'هيبة', 'راقي', 'أنيق', 'تميّز'])) tags.add('formal');
-            if (includesAny(text, ['عصري', 'حديث'])) tags.add('modern');
-            if (includesAny(text, ['كلاسيكي'])) tags.add('classic');
-            if (includesAny(text, ['غامض', 'مظلم', 'ليلي'])) tags.add('mysterious');
+            if (includesAny(text, ['فخم', 'مهيب', 'وقار', 'هيبة', 'راقي', 'أنيق', 'تميّز', 'رسمي'])) tags.add('formal');
+            if (includesAny(text, ['عصري', 'حديث', 'مشرق'])) tags.add('modern');
+            if (includesAny(text, ['كلاسيكي', 'أناقة'])) tags.add('classic');
+            if (includesAny(text, ['غامض', 'مظلم', 'ليلي', 'جذاب'])) tags.add('mysterious');
             if (includesAny(text, ['رومانسي'])) tags.add('romantic');
 
             return tags;
@@ -403,7 +409,7 @@
 
         // Step navigation
         let currentStep = 1;
-        const totalSteps = 7;
+        const totalSteps = 6;
 
         function updateProgress() {
             const progress = (currentStep / totalSteps) * 100;
@@ -432,12 +438,15 @@
             updateProgress();
         }
 
-        // Auto-advance on selection (except for step 7 which is the contact form)
+        // Auto-advance on selection
         document.querySelectorAll('input[type="radio"]').forEach(radio => {
             radio.addEventListener('change', function() {
                 setTimeout(() => {
                     if (currentStep < totalSteps) {
                         showStep(currentStep + 1);
+                    } else if (currentStep === totalSteps) {
+                        // Last step - show results
+                        calculateAndShowResult();
                     }
                 }, 300);
             });
@@ -502,11 +511,59 @@
 
             const perfume = perfumes[bestKey];
 
+            // Detect contradictions in user choices
+            const contradictions = [];
+            
+            // Daily usage + Strong/Powerful notes (oud, spicy)
+            if (usage === 'daily' && (note === 'oud' || note === 'spicy')) {
+                contradictions.push('الاستخدام اليومي لا يتناسب عادة مع العود أو التوابل القوية');
+            }
+            
+            // Soft strength + Oud/Spicy notes
+            if (strength === 'soft' && (note === 'oud' || note === 'spicy')) {
+                contradictions.push('العطر الناعم لا يتماشى مع نوتات العود أو التوابل الحادة');
+            }
+            
+            // Strong strength + Fresh/Floral notes
+            if (strength === 'strong' && (note === 'fresh' || note === 'floral')) {
+                contradictions.push('العطر القوي واللافت لا يتناسب عادة مع الحمضيات المنعشة أو الزهور الناعمة');
+            }
+            
+            // Formal occasions + Fresh notes
+            if (usage === 'formal' && note === 'fresh') {
+                contradictions.push('المناسبات الرسمية تتطلب عادة عطورًا أعمق من الحمضيات المنعشة');
+            }
+            
+            // Night usage + Fresh notes
+            if (usage === 'night' && note === 'fresh') {
+                contradictions.push('الاستخدام المسائي يتطلب عادة عطورًا أكثر دفئًا من الحمضيات');
+            }
+            
+            // Classic style + Fresh notes
+            if (style === 'classic' && note === 'fresh') {
+                contradictions.push('الطابع الكلاسيكي الأنيق لا يتماشى عادة مع النوتات المنعشة الخفيفة');
+            }
+            
+            // Modern style + Oud
+            if (style === 'modern' && note === 'oud') {
+                contradictions.push('الطابع العصري المضيء لا يتناسب عادة مع العود التقليدي');
+            }
+
             document.getElementById('plantImage').src = perfume.image;
             document.getElementById('plantImage').alt = perfume.name;
             document.getElementById('plantName').textContent = perfume.name;
-            document.getElementById('plantDescription').innerHTML = `<strong>النوتات:</strong> ${perfume.notes}<br><br>${perfume.description}`;
-            document.getElementById('shopLink').href = '#';
+            
+            // Build description with contradiction notice if needed
+            let descriptionHTML = `<strong>النوتات:</strong> ${perfume.notes}<br><br>${perfume.description}`;
+            
+            if (contradictions.length > 0) {
+                const contradictionText = contradictions.join('، ');
+                descriptionHTML = `<div class="contradiction-notice">
+                    <strong>ملاحظة:</strong> ${contradictionText}، لكن هذا أفضل خيار متاح بناءً على اختياراتك.
+                </div><br>` + descriptionHTML;
+            }
+            
+            document.getElementById('plantDescription').innerHTML = descriptionHTML;
 
             document.getElementById('quizContainer').style.display = 'none';
             document.getElementById('resultContainer').style.display = 'block';
@@ -517,7 +574,26 @@
         // Form submission handler
         document.getElementById('quizForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Calculate result first
             calculateAndShowResult();
+            
+            // Submit data to PHP backend
+            const formData = new FormData(this);
+            
+            fetch('index.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Quiz data saved successfully');
+                }
+            })
+            .catch(error => {
+                console.error('Error saving quiz data:', error);
+            });
         });
 
         document.getElementById('resetButton').addEventListener('click', function() {
@@ -534,4 +610,3 @@
     </script>
 </body>
 </html>
-

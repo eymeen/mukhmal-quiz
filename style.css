@@ -246,6 +246,21 @@ body {
     font-weight: 400;
 }
 
+.contradiction-notice {
+    background: rgba(123, 27, 56, 0.1);
+    border: 1px solid var(--accent-burgundy);
+    padding: 20px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.contradiction-notice strong {
+    color: var(--accent-gold);
+    font-weight: 400;
+}
+
 .result-actions {
     display: flex;
     flex-direction: column;

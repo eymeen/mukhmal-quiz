@@ -586,13 +586,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_quiz'])) {
 
             const perfume = perfumes[bestKey];
 
+            // Detect contradictions in user choices
+            const contradictions = [];
+            
+            // Daily usage + Strong/Powerful notes (oud, spicy)
+            if (usage === 'daily' && (note === 'oud' || note === 'spicy')) {
+                contradictions.push('الاستخدام اليومي لا يتناسب عادة مع العود أو التوابل القوية');
+            }
+            
+            // Soft strength + Oud/Spicy notes
+            if (strength === 'soft' && (note === 'oud' || note === 'spicy')) {
+                contradictions.push('العطر الناعم لا يتماشى مع نوتات العود أو التوابل الحادة');
+            }
+            
+            // Strong strength + Fresh/Floral notes
+            if (strength === 'strong' && (note === 'fresh' || note === 'floral')) {
+                contradictions.push('العطر القوي واللافت لا يتناسب عادة مع الحمضيات المنعشة أو الزهور الناعمة');
+            }
+            
+            // Formal occasions + Fresh notes
+            if (usage === 'formal' && note === 'fresh') {
+                contradictions.push('المناسبات الرسمية تتطلب عادة عطورًا أعمق من الحمضيات المنعشة');
+            }
+            
+            // Night usage + Fresh notes
+            if (usage === 'night' && note === 'fresh') {
+                contradictions.push('الاستخدام المسائي يتطلب عادة عطورًا أكثر دفئًا من الحمضيات');
+            }
+            
+            // Classic style + Fresh notes
+            if (style === 'classic' && note === 'fresh') {
+                contradictions.push('الطابع الكلاسيكي الأنيق لا يتماشى عادة مع النوتات المنعشة الخفيفة');
+            }
+            
+            // Modern style + Oud
+            if (style === 'modern' && note === 'oud') {
+                contradictions.push('الطابع العصري المضيء لا يتناسب عادة مع العود التقليدي');
+            }
+
             // Store result in hidden field for PHP submission
             document.getElementById('result_perfume').value = perfume.name;
 
             document.getElementById('plantImage').src = perfume.image;
             document.getElementById('plantImage').alt = perfume.name;
             document.getElementById('plantName').textContent = perfume.name;
-            document.getElementById('plantDescription').innerHTML = `<strong>النوتات:</strong> ${perfume.notes}<br><br>${perfume.description}`;
+            
+            // Build description with contradiction notice if needed
+            let descriptionHTML = `<strong>النوتات:</strong> ${perfume.notes}<br><br>${perfume.description}`;
+            
+            if (contradictions.length > 0) {
+                const contradictionText = contradictions.join('، ');
+                descriptionHTML = `<div class="contradiction-notice">
+                    <strong>ملاحظة:</strong> ${contradictionText}، لكن هذا أفضل خيار متاح بناءً على اختياراتك.
+                </div><br>` + descriptionHTML;
+            }
+            
+            document.getElementById('plantDescription').innerHTML = descriptionHTML;
 
             document.getElementById('quizContainer').style.display = 'none';
             document.getElementById('resultContainer').style.display = 'block';
